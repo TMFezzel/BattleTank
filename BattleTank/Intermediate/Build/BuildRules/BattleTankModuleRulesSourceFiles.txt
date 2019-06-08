@@ -1,3 +1,0 @@
-C:\Users\Adam\Desktop\Unreal Workspace\BattleTank\BattleTank\Source\BattleTank\BattleTank.Build.cs
-C:\Users\Adam\Desktop\Unreal Workspace\BattleTank\BattleTank\Source\BattleTank.Target.cs
-C:\Users\Adam\Desktop\Unreal Workspace\BattleTank\BattleTank\Source\BattleTankEditor.Target.cs
