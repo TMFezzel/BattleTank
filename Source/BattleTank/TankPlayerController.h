@@ -23,7 +23,6 @@ public:
 	void Tick(float DeltaTime) override;
 
 private: 
-	
 
 	//Return tank that this controller is in charge of.
 	ATank* GetControlledTank() const;
