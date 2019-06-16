@@ -1,8 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "TankPlayerController.h"
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
-#include "TankPlayerController.h"
+#include "TankAimingComponent.h"
+#include "Tank.h"
 
 void ATankPlayerController::BeginPlay(){
 	Super::BeginPlay();
@@ -23,8 +25,6 @@ void ATankPlayerController::AimTowardsCrosshair() {
 
 	FVector HitLocation; //OUT Parameter
 	if (GetSightRayHitLocation(HitLocation)) { //Is also going to raytrace
-		UE_LOG(LogTemp, Warning, TEXT("Hit Location %s"), *HitLocation.ToString());
-		//UE_LOG(LogTemp, Warning, TEXT("Hit Location %s"), *(HitLocation.ToString()));
 		//If it hits the landscape
 		GetControlledTank()->AimAt(HitLocation);
 	}
