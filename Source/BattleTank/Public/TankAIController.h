@@ -21,7 +21,7 @@ private:
 	void BeginPlay() override;
 
 	//Return tank that this controller is in charge of.
-	ATank* GetControlledTank() const;
+	ATank* ControlledTank = nullptr;
 
-	ATank* GetPlayerTank() const;
+	ATank* PlayerTank = nullptr;
 };
