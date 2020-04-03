@@ -8,6 +8,9 @@
 
 void ATankPlayerController::BeginPlay(){
 	Super::BeginPlay();
+	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (ensure(AimingComponent)) { FoundAimingComponent(AimingComponent); }
+	else { UE_LOG(LogTemp, Warning, TEXT("No aiming component found on controlled tank")) }
 
 	ATank* ControlledTank = GetControlledTank();
 	if (!ControlledTank) {
@@ -21,7 +24,7 @@ void ATankPlayerController::Tick(float DeltaTime) {
 }
 
 void ATankPlayerController::AimTowardsCrosshair() {
-	if (!GetControlledTank()) {return;}
+	if (!ensure(GetControlledTank())) {return;}
 
 	FVector HitLocation; //OUT Parameter
 	if (GetSightRayHitLocation(HitLocation)) { //Is also going to raytrace

@@ -7,6 +7,7 @@
 #include "TankPlayerController.generated.h"
 
 class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
@@ -20,11 +21,15 @@ public:
 
 	void Tick(float DeltaTime) override;
 
-private: 
-
+protected:
 	//Return tank that this controller is in charge of.
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	ATank* GetControlledTank() const;
-	
+
+	UFUNCTION(BlueprintImplementableEvent, Category = Setup)
+	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
+
+private: 
 	void AimTowardsCrosshair();
 
 	//Return an OUT parameter, true if hit landscape
