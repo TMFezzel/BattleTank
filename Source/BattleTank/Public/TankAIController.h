@@ -21,9 +21,9 @@ private:
 	void BeginPlay() override;
 
 	//Return tank that this controller is in charge of.
-	ATank* ControlledTank = nullptr;
+	AActor* ControlledTank = nullptr;
 
-	ATank* PlayerTank = nullptr;
+	AActor* PlayerTank = nullptr;
 
 	//How close can the AI tank get to the player
 	float AcceptanceRadius = 3;

@@ -4,18 +4,11 @@
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
-#include "Tank.h"
 
 void ATankPlayerController::BeginPlay(){
 	Super::BeginPlay();
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (ensure(AimingComponent)) { FoundAimingComponent(AimingComponent); }
-	else { UE_LOG(LogTemp, Warning, TEXT("No aiming component found on controlled tank")) }
-
-	ATank* ControlledTank = GetControlledTank();
-	if (!ControlledTank) {
-		UE_LOG(LogTemp, Warning, TEXT("No controlled tank for tank player controller"));
-	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime) {
@@ -24,24 +17,18 @@ void ATankPlayerController::Tick(float DeltaTime) {
 }
 
 void ATankPlayerController::AimTowardsCrosshair() {
-	if (!ensure(GetControlledTank())) {return;}
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) {return;}
 
 	FVector HitLocation; //OUT Parameter
 	if (GetSightRayHitLocation(HitLocation)) { //Is also going to raytrace
 		//If it hits the landscape
-		GetControlledTank()->AimAt(HitLocation);
+		AimingComponent->AimAt(HitLocation);
 	}
 }
 
 //Get world location of linetrace through crosshair, true if hits landscape
 bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const{
-	
-	/**
-	OutHitLocation = RayTraceEnd
-	If a tank on the hit location
-		Return true
-	Else
-	**/
 
 	//Find crosshair position in pixel coordinates
 	int32 ViewportSizeX, ViewportSizeY;
@@ -81,8 +68,5 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	return false; //Line trace failed.
 }
 
-ATank* ATankPlayerController::GetControlledTank() const{
-	return Cast<ATank>(GetPawn());
-}
 
 
