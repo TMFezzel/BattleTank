@@ -41,6 +41,10 @@ private:
 
 	void MoveBarrelTowards(FVector AimDirection);
 
+	bool IsBarrelMoving();
+
+	FVector AimDirection;
+
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 	
@@ -51,6 +55,10 @@ private:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	double LastFireTime = 0;
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	void BeginPlay() override;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
