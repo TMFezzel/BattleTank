@@ -18,7 +18,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void SetThrottle(float Throttle);
 
+	void DriveTrack();
+
+	float CurrentThrottle = 0;
+
 	//Max force per track in Newtons
 	UPROPERTY(EditDefaultsOnly)
 		float TrackMaxDrivingForce = 60000000;
+
+private:
+	UTankTrack();
+
+	virtual void BeginPlay()override;
+
+	void ApplySidewaysForce();
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };
