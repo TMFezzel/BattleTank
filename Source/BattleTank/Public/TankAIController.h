@@ -23,6 +23,8 @@ private:
 
 	AActor* PlayerTank = nullptr;
 
+protected:
 	//How close can the AI tank get to the player
-	float AcceptanceRadius = 3;
+	UPROPERTY(EditAnywhere, Category = Movement)
+	float AcceptanceRadius = 800; //8 meters
 };

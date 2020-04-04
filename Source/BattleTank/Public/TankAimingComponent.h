@@ -12,7 +12,8 @@ enum class EFiringState : uint8
 {
 	Locked,
 	Aiming,
-	Reloading
+	Reloading,
+	OutOfAmmo
 };
 
 //Forward declaration allows UTankBarrel to be referenced.
@@ -34,6 +35,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
+
+	EFiringState GetFiringState() const;
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	int GetRoundsLeft() const;
 
 private:
 	// Sets default values for this component's properties
@@ -59,6 +65,8 @@ private:
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void BeginPlay() override;
+
+	int RoundsLeft = 3;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
