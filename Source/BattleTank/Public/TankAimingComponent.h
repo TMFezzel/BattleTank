@@ -39,7 +39,7 @@ public:
 	EFiringState GetFiringState() const;
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
-	int GetRoundsLeft() const;
+	int32 GetRoundsLeft() const;
 
 private:
 	// Sets default values for this component's properties
@@ -57,6 +57,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeInSeconds = 3;
 
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	int32 RoundsLeft = 20;
+
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
@@ -65,8 +68,6 @@ private:
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void BeginPlay() override;
-
-	int RoundsLeft = 3;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = Firing)

@@ -23,6 +23,11 @@ private:
 
 	AActor* PlayerTank = nullptr;
 
+	virtual void SetPawn(APawn* InPawn)override;
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
 protected:
 	//How close can the AI tank get to the player
 	UPROPERTY(EditAnywhere, Category = Movement)
